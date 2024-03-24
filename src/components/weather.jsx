@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import "w3-css/w3.css";
 import Card from './card';
-// import Searchbar from './searchbar';
 import { FaSearch } from 'react-icons/fa'
-// import { SearchResultsList } from './searchlist';
 
 const Weather = () => {
 
     const [content, setContent] = useState('')
     const [city, setCity] = useState('Mumbai')
     const [icon, setIcon] = useState('assets/cloud.png')
-    const [error,setError]=useState("")
-    const key = "a7fd01d41c9aad864a9d4c6bf589d456";
+    const [error, setError] = useState("")
+    const key = import.meta.env.VITE_WEATHER_API;
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${key}`;
-
 
     const search = () => {
         const ele = document.getElementById("city").value;
@@ -30,8 +27,7 @@ const Weather = () => {
             })
             .then(content => {
                 setContent(content);
-                console.log(content)
-setError(null)
+                setError(null)
                 const weatherCondition = content.weather[0].main;
                 const iconMap = {
                     Clear: "assets/clear.png",
